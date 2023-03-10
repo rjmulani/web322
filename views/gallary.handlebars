@@ -1,0 +1,55 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    function initGallery() {
+        $(document).ready(function () {
+            $("input[type='submit']").click(function (event) {
+                event.preventDefault();
+                let radioButtons = $("input[name='image']");
+                if (radioButtons.length > 0) {
+                    let selectedImage = $("input[name='image']:checked").val();
+                    if (selectedImage) {
+                        $(".selected-image").css("display", "block");
+                        $(".selected-image img").attr("src", selectedImage + ".jpg");
+                        $(".selected-image img").attr("alt", selectedImage);
+                        $(".selected-image img").attr("width", "300");
+                        $(".selected-image img").attr("height", "300");
+                    } else {
+                        console.log("No radio button selected");
+                    }
+                } else {
+                    console.log("No radio buttons found");
+                }
+            });
+        });
+    }
+</script>
+<div class="heading">
+    Rutvik Mulanis Gallery <span style="margin-top: 1vmax; font-weight:lighter; font-size: 0.9rem;"> {{email}}!</span>
+</div>
+<div class="box">
+<div class="radio-buttons">
+
+    {{#each fileNames}}
+
+    {{#with (lookup ../namesWithoutFileExtension @index)}}
+    <div class="radio-box">
+ <input type="radio" id="image" name="image" value="{{this}}">
+
+    <label>{{.}}</label><br>
+    </div>
+   
+    {{/with}}
+    {{/each}}
+    <br><br>
+<input type="submit" value="Submit">
+</div>
+
+<div class="selected-image" style="display: none;">
+    <img src="" alt="Selected Image">
+</div>
+</div>
+
+<script>
+    initGallery();
+</script>

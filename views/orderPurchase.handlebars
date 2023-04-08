@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Order and Purchase Webpage</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="text-center">Order and Purchase Webpage</h2>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card mb-3">
+            <img src="{{imageSrc}}" class="card-img-top" alt="{{imageName}}" />
+            <div class="card-body">
+              <h5 class="card-title">{{imageName}}</h5>
+              <p class="card-text">{{imageDescription}}</p>
+              <p class="card-text">${{imagePrice}}</p>
+              <div class="d-flex justify-content-between">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  id="buyBtn"
+                >BUY</button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  id="cancelBtn"
+                >CANCEL</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $('#buyBtn').click(function () { const productId = '{{productId}}';
+      $.ajax({ url: '/products/' + productId, method: 'PUT', data: { status: 's'
+      }, success: function () { alert('Sold!'); window.location.href =
+      '/gallary'; } }); }); $('#cancelBtn').click(function () { const
+      confirmResult = confirm('Maybe next time?'); if (confirmResult) {
+      window.location.href = '/gallary'; } });
+    </script>
+  </body>
+</html>
